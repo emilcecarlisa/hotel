@@ -1,4 +1,4 @@
-# get the total cost for a given reservation
+# An administrator can view a list of rooms not reserved for a given date range
 
 require "pry"
 require "date"
@@ -17,12 +17,14 @@ module Hotel
       return rand(1..20)
     end
 
-    def make_reservation(check_in, check_out)
+    def make_reservation(check_in, check_out, room_num)
       room_num = select_room # not actually stored in new_reservation
 
       new_reservation = Reservation.new(check_in, check_out)
 
       @reservations << new_reservation
+
+      # binding.pry
 
       return new_reservation
     end
@@ -40,7 +42,7 @@ module Hotel
         return reservation
       end
 
-    end
+    end # call reservation
 
 
     # range of dates should end at second to last place (-2)

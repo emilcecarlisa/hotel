@@ -44,20 +44,22 @@ describe "Admin" do
   describe "return reservations" do
     before do
       @admin = Hotel::Administrator.new()
+      @admin.make_reservation("24/12/2018", "25/12/2018")
     end
 
     it "can call all reservation on a given date" do
-      @admin.make_reservation("24/12/2018", "25/12/2018")
-
       get_reservation = @admin.call_reservation("24/12/2018", "25/12/2018")
-      # expected_checkin = DateTime("24/12/2018")
-      # expected_checkout = DateTime("25/12/2018")
 
       get_reservation.must_be_instance_of Hotel::Reservation
     end
   end
 
-  describe "calculates the cost of a stay" do
+  describe "admin viewing available rooms" do
+    it "view rooms not reserved for a given date range"
+    # Arrange need instance of admin, not date
 
+    # Act
+
+    # Assert
   end
 end

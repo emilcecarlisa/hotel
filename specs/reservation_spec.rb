@@ -25,25 +25,21 @@ describe "Reservation" do
 end
 
 describe "checks the lenth of stay" do
-  before do
-    @admin = Hotel::Administrator.new()
-    # @reserve1 = Hotel::Reservation.new("24/12/2018","25/12/2018")
-  end
 
   it "checks the duration of the reservation" do
-    reserve1 = @admin.make_reservation("24/12/2018", "25/12/2018")
+    reserve1 = Hotel::Reservation.new("24/12/2018", "26/12/2018")
 
-    check_in = Date.parse("24/12/2018")
-    check_out = Date.parse("25/12/2018")
-
-    stay_length = reserve1.get_duration(check_in, check_out)
-
-    stay_length.must_equal(1)
+    reserve1.get_stay_length.must_equal(2)
   end
+end
 
-  # it "gets the total cost of a stay " do
-  #
-  # end
+describe "returns the cost of the reservation" do
+
+  it "gets the total cost of a stay " do
+    reserve1 = Hotel::Reservation.new("24/12/2018", "26/12/2018")
+
+    reserve1.total_cost.must_equal(200)
+  end
 
 
 end
