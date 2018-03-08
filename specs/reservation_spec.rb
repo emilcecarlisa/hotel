@@ -8,7 +8,7 @@ require_relative '../lib/admin'
 
 describe "Reservation" do
   before do
-    @reserve1 = Hotel::Reservation.new("2019/10/30","2018/10/30")
+    @reserve1 = Hotel::Reservation.new("30/10/2019","30/10/2018")
   end
 
   it "creates an instance of a reservation" do
@@ -17,11 +17,9 @@ describe "Reservation" do
 
   it "raises an error if an invalid date range provided" do
     today = Time.now
-    check_out = today.strftime("%Y/%m/%d")
-    check_in = Date.parse("2019/10/29")
+    check_out = today.strftime("%d/%m/%Y")
+    check_in = Date.parse("29/10/2019")
 
-    puts "THIS IS CHECK IN DATE #{check_in}"
-    puts "THIS IS CHECK OUT DATE #{check_out}"
     proc {@reserve1.check_dates}.must_raise ArgumentError
   end
 

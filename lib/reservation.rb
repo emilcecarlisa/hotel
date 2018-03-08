@@ -1,19 +1,20 @@
 # time available for reservation (date range?)
-
+require "pry"
 
 module Hotel
+
   class Reservation
     # room is available if someone has not chosen that date
     # change to occupied after date is chosen
-    attr_reader :check_in, :check_out
+    attr_reader :check_in, :check_out, :parse_date
 
     def initialize(check_in, check_out)
-      @check_in = parse_date(check_in)
-      @check_out = parse_date(check_out)
+      @check_in = Reservation.parse_date(check_in)
+      @check_out = Reservation.parse_date(check_out)
     end
 
-    def parse_date(date)
-      return Date.parse(date)
+    def self.parse_date(date) # self necessary for calling class
+      return DateTime.strptime(date, "%d/%m/%Y")
     end
 
     def check_dates
@@ -25,6 +26,5 @@ module Hotel
 
   end # class
 
-end #  module
 
-# customer1 = Hotel::Reservation.new(1,13, "12/2/2018", "12/3/2018")
+end #  module
