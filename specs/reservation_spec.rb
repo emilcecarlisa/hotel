@@ -22,10 +22,27 @@ describe "Reservation" do
 
     proc {@reserve1.check_dates}.must_raise ArgumentError
   end
+end
 
-  # it "creates rooms array, numbered 1-20, on initialization" do
-  #   admin = Hotel::Administrator.new
-  #   admin.must_be_instance_of Hotel::Administrator
+describe "checks the lenth of stay" do
+  before do
+    @admin = Hotel::Administrator.new()
+    # @reserve1 = Hotel::Reservation.new("24/12/2018","25/12/2018")
+  end
+
+  it "checks the duration of the reservation" do
+    reserve1 = @admin.make_reservation("24/12/2018", "25/12/2018")
+
+    check_in = Date.parse("24/12/2018")
+    check_out = Date.parse("25/12/2018")
+
+    stay_length = reserve1.get_duration(check_in, check_out)
+
+    stay_length.must_equal(1)
+  end
+
+  # it "gets the total cost of a stay " do
+  #
   # end
 
 

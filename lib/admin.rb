@@ -8,7 +8,6 @@ module Hotel
 
     attr_reader :reservations
 
-    COST = 200
 
     def initialize()
       @reservations = []
@@ -43,15 +42,6 @@ module Hotel
 
     end
 
-    # def get_duration
-    #   @reservations
-    #
-    #   puts "THIS IS CHECK IN DATE #{call_reservation.check_in}"
-    # end
-
-    # def total_cost
-    #   get_reserved_dates.check_in...get_reserved_dates.check_out
-    # end
 
     # range of dates should end at second to last place (-2)
   end # class
