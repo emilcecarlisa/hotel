@@ -11,6 +11,7 @@ module Hotel
 
     def initialize()
       @reservations = []
+      @rooms = (1..20).to_a
     end
 
     # def select_room()
@@ -23,8 +24,6 @@ module Hotel
       new_reservation = Reservation.new(check_in, check_out, room_num)
 
       @reservations << new_reservation
-
-      # binding.pry
 
       return new_reservation
     end
@@ -43,28 +42,34 @@ module Hotel
 
     end # call reservation
 
-    def see_available(requested_date)
-  # call only if dates don't overlap, assign any room #
+    def see_available(requested_date) # eventually turn to range also?
   # if reservation in array has check in date, then don't
-  # return that room
-  # else return rooms that are available
-    #
-    # start_parsed = Hotel::Reservation.parse_date(start_date)
+  # push that reservation into an unvailable array
+  # the unavail array can be compared against complete list of rooms
+    requested_date = Hotel::Reservation.parse_date(requested_date)
     # end_parsed = Hotel::Reservation.parse_date(end_date)
 
-    # upto(max){|date| ...}
+
+      unavailable_rooms = []
 
       @reservations.each do |reservation|
         date_range = reservation.check_in.upto(reservation.check_out - 1)
 
-        date_range.each do |individual_day|
-          until individual_day != requested_date
-            return room_num
+        date_range.each do |reserved_day|
+          if reserved_day == requested_date
+            # pushing the unavail room here
+            unavailable_rooms << reservation.room_num
+            break
           end
+          puts "THIS IS RESERVED DATE #{reserved_day}"
         end
 
-      end
+      end # outside each loop
 
+
+      return @rooms.find_all do |room_no| #looks at each room
+        !unavailable_rooms.include? room_no
+      end
 
 
     end # see_available
