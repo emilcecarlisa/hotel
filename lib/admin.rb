@@ -13,9 +13,9 @@ module Hotel
       @reservations = []
     end
 
-    def select_room()
-      # return rand(1..20)
-    end
+    # def select_room()
+    #   return rand(1..20)
+    # end
 
     def make_reservation(check_in, check_out, room_num)
       # room_num = select_room
@@ -29,9 +29,7 @@ module Hotel
       return new_reservation
     end
 
-    def call_reservation(start_date, end_date) #calls reservation
-
-      # call only if dates don't overlap, assign any room #
+    def call_reservation(start_date, end_date) #is this class doing what you think/want
 
       start_parsed = Hotel::Reservation.parse_date(start_date)
       end_parsed = Hotel::Reservation.parse_date(end_date)
@@ -45,23 +43,29 @@ module Hotel
 
     end # call reservation
 
-    def see_available (start_date, end_date) #calls reservation
+    def see_available(requested_date)
+  # call only if dates don't overlap, assign any room #
+  # if reservation in array has check in date, then don't
+  # return that room
+  # else return rooms that are available
+    #
+    # start_parsed = Hotel::Reservation.parse_date(start_date)
+    # end_parsed = Hotel::Reservation.parse_date(end_date)
 
-      # call only if dates don't overlap, assign any room #
-
-      start_parsed = Hotel::Reservation.parse_date(start_date)
-      end_parsed = Hotel::Reservation.parse_date(end_date)
-
-      # if reservation in array has check in date, then don't
-      # return that room
-      # else return rooms that are available
+    # upto(max){|date| ...}
 
       @reservations.each do |reservation|
-        if reservation.check_in == start_parsed && reservation.check_out == end_parsed
+        date_range = reservation.check_in.upto(reservation.check_out - 1)
+
+        date_range.each do |individual_day|
+          until individual_day != requested_date
+            return room_num
+          end
         end
 
-        return reservation
       end
+
+
 
     end # see_available
 

@@ -61,11 +61,25 @@ describe "Admin" do
     end
 
     it "view rooms not available for a given date range" do
-      @admin.see_reservation("24/12/2018", "30/12/2018")
+      # @admin.see_available("24/12/2018", "30/12/2018")
+
 
       # return room if the dates aren't overlapping
       # room numbers associated with that reservation are thus unavailable
       # there are no pre-set available rooms
     end
+
+    it "return all rooms if the array is empty" do
+
+    end
+
+    it "if check_out day falls on first day of new request then make reservation" do
+
+    end
+
+    it "if requested reservation dates fall in between another reservation, then unavailable (not including last day)" do
+
+    end
+
   end # admin viewing
 end # Admin
