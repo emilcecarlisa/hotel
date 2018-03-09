@@ -7,9 +7,10 @@ module Hotel
 
     attr_reader :check_in, :check_out, :parse_date
 
-    def initialize(check_in, check_out)
-      @check_in = Reservation.parse\_date(check_in)
+    def initialize(check_in, check_out, room_num)
+      @check_in = Reservation.parse_date(check_in)
       @check_out = Reservation.parse_date(check_out)
+      @room_num = room_num
     end
 
     def self.parse_date(date) # self necessary for calling class
