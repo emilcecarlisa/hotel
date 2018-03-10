@@ -53,7 +53,7 @@ module Hotel
       unavailable_rooms = []
 
       @reservations.each do |reservation|
-        date_range = reservation.check_in.upto(reservation.check_out - 1)
+        date_range = reservation.check_in.upto(reservation.check_out)
 
         date_range.each do |reserved_day|
           if reserved_day == requested_date

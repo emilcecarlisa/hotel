@@ -60,23 +60,23 @@ describe "Admin" do
       @admin.make_reservation("24/12/2018", "30/12/2018", 1)
     end
 
-    it "view rooms not available for a given date range" do
+    it "view rooms not reserved for a given date range" do
       available_rooms = @admin.see_available("24/12/2018")
 
       available_rooms.must_equal (2..20).to_a
     end
 
+    it "returns an error if requested reservation check in date is before another reservation's end date" do
+
+    end
+
+    # it "returns a reservation request if the check in date is on or after another reservation's check out date" do
+    #
+    # end
+
     # it "return all rooms if the array is empty" do
     #
     # end
     #
-    # it "if check_out day falls on first day of new request then make reservation" do
-    #
-    # end
-    #
-    # it "if requested reservation dates fall in between another reservation, then unavailable (not including last day)" do
-    #
-    # end
-
   end # admin viewing
 end # Admin
