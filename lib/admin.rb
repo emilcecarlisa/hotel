@@ -14,21 +14,34 @@ module Hotel
       @rooms = (1..20).to_a
     end
 
-    # def select_room()
-    #   return rand(1..20)
-    # end
+    def select_room()
+      # return rand(1..20)
+      # grab a room from @rooms
+    end
 
-    def make_reservation(check_in, check_out, room_num)
+    def make_reservation(requested_check_in, requested_check_out, room_num)
       # room_num = select_room
 
-      new_reservation = Reservation.new(check_in, check_out, room_num)
+      # def check_dates
+        @reservation.each do |reservation|
+          if reservation.check_in == requested_check_in || reservation.check_out == requested_check_out
+            raise ArgumentError.new("Date unavailable")
+          elsif requested_check_in < reservation.check_out
+            raise ArgumentError.new("Date unavailable")
+          elsif requested_check_in >= reservation.check_in && requested_check_out >= reservation.check_out
+            raise ArgumentError.new("Date unavailable")
+          end # conditional
+        end
+      # end
+
+      new_reservation = Reservation.new(requested_check_in, requested_check_out, room_num)
 
       @reservations << new_reservation
 
       return new_reservation
     end
 
-    def call_reservation(start_date, end_date) #is this class doing what you think/want
+    def call_reservation(start_date, end_date)
 
       start_parsed = Hotel::Reservation.parse_date(start_date)
       end_parsed = Hotel::Reservation.parse_date(end_date)
@@ -42,13 +55,9 @@ module Hotel
 
     end # call reservation
 
-    def see_available(requested_date) # eventually turn to range also?
-  # if reservation in array has check in date, then don't
-  # push that reservation into an unvailable array
-  # the unavail array can be compared against complete list of rooms
-    requested_date = Hotel::Reservation.parse_date(requested_date)
-    # end_parsed = Hotel::Reservation.parse_date(end_date)
+    def see_available(requested_date)
 
+    requested_date = Hotel::Reservation.parse_date(requested_date)
 
       unavailable_rooms = []
 
@@ -61,13 +70,13 @@ module Hotel
             unavailable_rooms << reservation.room_num
             break
           end
-          puts "THIS IS RESERVED DATE #{reserved_day}"
+          # puts "THIS IS RESERVED DATE #{reserved_day}"
         end
 
       end # outside each loop
 
 
-      return @rooms.find_all do |room_no| #looks at each room
+      return @rooms.find_all do |room_no|
         !unavailable_rooms.include? room_no
       end
 

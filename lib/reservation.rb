@@ -19,10 +19,11 @@ module Hotel
 
     def check_dates
       if @check_in > @check_out
-        raise ArgumentError.new("End date should be after the start date")
+        raise ArgumentError.new("Dates unavailable")
       end
     end
 
+    
     def get_stay_length
       (@check_out - @check_in).to_i
     end
