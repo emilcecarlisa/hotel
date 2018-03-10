@@ -13,6 +13,7 @@ module Hotel
       @room_num = room_num
     end
 
+
     def self.parse_date(date) # self necessary for calling class
       return DateTime.strptime(date, "%d/%m/%Y")
     end
@@ -23,7 +24,7 @@ module Hotel
       end
     end
 
-    
+
     def get_stay_length
       (@check_out - @check_in).to_i
     end

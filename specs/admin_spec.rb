@@ -23,7 +23,7 @@ describe "Admin" do
     end
 
     it "can make a reservation" do
-      @admin.make_reservation("24/12/2018", "25/12/2018", 1)
+      @admin.make_reservation("24/12/2018", "25/12/2018")
 
       result = @admin.reservations
 
@@ -33,7 +33,7 @@ describe "Admin" do
 
     it "can retrieve all reservations" do
       # Arrange
-      @admin.make_reservation("24/12/2018", "25/12/2018", 1)
+      @admin.make_reservation("24/12/2018", "25/12/2018")
       # Act
       result = @admin.reservations
       # Assert
@@ -44,7 +44,7 @@ describe "Admin" do
   describe "return reservations" do
     before do
       @admin = Hotel::Administrator.new()
-      @admin.make_reservation("24/12/2018", "25/12/2018", 1)
+      @admin.make_reservation("24/12/2018", "25/12/2018")
     end
 
     it "can call all reservation on a given date" do
@@ -57,7 +57,7 @@ describe "Admin" do
   describe "admin viewing available rooms" do
     before do
       @admin = Hotel::Administrator.new()
-      @admin.make_reservation("24/12/2018", "30/12/2018", 1)
+      @admin.make_reservation("24/12/2018", "30/12/2018")
     end
 
     it "view rooms not reserved for a given date range" do
@@ -67,30 +67,29 @@ describe "Admin" do
     end
 
     it "returns an error if requested reservation has same date as an existing reservation" do
-      @admin.make_reservation("24/12/2018", "30/12/2018", 0)
+      @admin.make_reservation("24/12/2018", "30/12/2018")
       # assign room_num from the rooms instance variable?
-
 
 
     end
 
     it "returns an error if requested reservation overlaps in the back" do
-      @admin.make_reservation("30/12/2018", "02/01/2019", 0)
+      @admin.make_reservation("30/12/2018", "02/01/2019")
       # have one appt, try to make another
     end
 
     it "returns an error if requested reservation overlaps in the front" do
-      @admin.make_reservation("20/12/2018", "24/12/2018", 0)
+      @admin.make_reservation("20/12/2018", "24/12/2018")
       # have one appt, try to make another
     end
 
     it "returns an error if requested reservation is completely contained" do
-      @admin.make_reservation("26/12/2018", "27/12/2018", 0)
+      @admin.make_reservation("26/12/2018", "27/12/2018")
       # have one appt, try to make another
     end
 
     it "returns an error if requested reservation is completely containing an existing reservation" do
-      @admin.make_reservation("23/12/2018", "01/01/2019", 0)
+      @admin.make_reservation("23/12/2018", "01/01/2019")
       # have one appt, try to make another
     end
     # it "return all rooms if the array is empty" do
