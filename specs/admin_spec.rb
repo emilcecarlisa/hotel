@@ -48,7 +48,7 @@ describe "Admin" do
     end
 
     it "can call all reservation on a given date" do
-      get_reservation = @admin.call_reservation("24/12/2018", "25/12/2018")
+      get_reservation = @admin.see_available("24/12/2018", "25/12/2018")
 
       get_reservation.must_be_instance_of Hotel::Reservation
     end
@@ -61,9 +61,9 @@ describe "Admin" do
     end
 
     it "view rooms not reserved for a given date range" do
-      available_rooms = @admin.see_available("24/12/2018")
+      available_rooms = @admin.see_available("24/12/2018", "30/12/2018")
 
-      available_rooms.must_equal (2..20).to_a
+      # available_rooms.must_equal (2..20).to_a
     end
 
     it "returns an error if requested reservation has same date as an existing reservation" do
