@@ -10,10 +10,10 @@ module Hotel
     def initialize()
       @rooms = {}
 
-      (1..20).each do | room_num | #creates arrays where room_num is key
+      (1..20).each do |room_num| #creates arrays where room_num is key
         @rooms[room_num] = []
       end
-      binding.pry
+      # binding.pry
     end
 
 
@@ -41,23 +41,20 @@ module Hotel
       @rooms.each do |room_num, reservations|
         reservations.each do |reservation|
 
-          if requested_check_in >= reservation.check_in
-            && requested_check_out <= reservation.check_out
+          if requested_check_in >= reservation.check_in && requested_check_out <= reservation.check_out
             next
 
           elsif requested_check_in < reservation.check_in && requested_check_out <= reservation.check_out
             next
 
           elsif requested_check_in >= reservation.check_in && requested_check_out >= reservation.check_out
-
           end # if conditional
+
         end
         available_rooms << room_num
       end
       return available_rooms
-    end
+    end # see_available
 
-  end # see_available
-
-end # class
+  end # class
 end # module
