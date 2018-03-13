@@ -9,7 +9,7 @@ module Hotel
     def initialize()
       @rooms = {}
 
-      (1..20).each do |room_num| #creates arrays where room_num is key
+      (1..20).each do |room_num|
         @rooms[room_num] = []
       end
       # binding.pry
@@ -34,19 +34,21 @@ module Hotel
 
 
     def see_available(requested_check_in, requested_check_out)
+      parsed_req_in = DateTime.strptime(requested_check_in, "%d/%m/%Y")
+      parsed_req_out = DateTime.strptime(requested_check_out, "%d/%m/%Y")
 
       available_rooms = []
 
       @rooms.each do |room_num, reservations|
         reservations.each do |reservation|
 
-          if requested_check_in >= reservation.check_in && requested_check_out <= reservation.check_out
+          if parsed_req_in >= reservation.check_in && parsed_req_out <= reservation.check_out
             next
 
-          elsif requested_check_in < reservation.check_in && requested_check_out <= reservation.check_out
+          elsif parsed_req_in < reservation.check_in && parsed_req_out <= reservation.check_out
             next
 
-          elsif requested_check_in >= reservation.check_in && requested_check_out >= reservation.check_out
+          elsif parsed_req_in >= reservation.check_in && parsed_req_out >= reservation.check_out
           end # if conditional
 
         end

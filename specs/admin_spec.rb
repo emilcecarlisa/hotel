@@ -51,34 +51,42 @@ describe "Admin" do
   end
 
 
-  xdescribe "more tests" do
-
-    it "view rooms not reserved for a given date range" do
-      available_rooms = @admin.see_available("24/12/2018", "30/12/2018")
-      # available_rooms.must_equal (2..20).to_a
+  describe "creates reservation if dates are valid" do
+    before do
+      @admin = Hotel::Administrator.new()
     end
 
-    it "returns an error if requested reservation overlaps in the back" do
-      @admin.make_reservation("30/12/2018", "02/01/2019")
-      # have one appt, try to make another
+    it "view available rooms for a given date range" do
+      available_room = @admin.see_available("24/12/2018", "30/12/2018")
+      available_room.must_equal (1..20).to_a
     end
 
-    it "returns an error if requested reservation overlaps in the front" do
-      @admin.make_reservation("20/12/2018", "24/12/2018")
-      # have one appt, try to make another
-    end
+    it "returns an error if no rooms are available" do
+      @admin.make_reservation("01/01/2018", "15/01/2018")
+      @admin.make_reservation("01/01/2018", "15/01/2018")
+      @admin.make_reservation("01/01/2018", "15/01/2018")
+      @admin.make_reservation("01/01/2018", "15/01/2018")
+      @admin.make_reservation("01/01/2018", "15/01/2018")
+      @admin.make_reservation("01/01/2018", "15/01/2018")
+      @admin.make_reservation("01/01/2018", "15/01/2018")
+      @admin.make_reservation("01/01/2018", "15/01/2018")
+      @admin.make_reservation("01/01/2018", "15/01/2018")
+      @admin.make_reservation("01/01/2018", "15/01/2018")
+      @admin.make_reservation("01/01/2018", "15/01/2018")
+      @admin.make_reservation("01/01/2018", "15/01/2018")
+      @admin.make_reservation("01/01/2018", "15/01/2018")
+      @admin.make_reservation("01/01/2018", "15/01/2018")
+      @admin.make_reservation("01/01/2018", "15/01/2018")
+      @admin.make_reservation("01/01/2018", "15/01/2018")
+      @admin.make_reservation("01/01/2018", "15/01/2018")
+      @admin.make_reservation("01/01/2018", "15/01/2018")
+      @admin.make_reservation("01/01/2018", "15/01/2018")
+      @admin.make_reservation("01/01/2018", "15/01/2018")
+      @admin.make_reservation("01/01/2018", "15/01/2018")
+      @admin.make_reservation("01/01/2018", "15/01/2018")
 
-    it "returns an error if requested reservation is completely contained" do
-      @admin.make_reservation("26/12/2018", "27/12/2018")
-      # have one appt, try to make another
+      proc { @admin.see_available}.must_raise ArgumentError
     end
-
-    it "returns an error if requested reservation is completely containing an existing reservation" do
-      @admin.make_reservation("23/12/2018", "01/01/2019")
-      # have one appt, try to make another
-    end
-
-    it "return all rooms if the array is empty" do
-    end
-  end
+  end # describe
+  
 end # Admin
