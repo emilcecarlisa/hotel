@@ -4,8 +4,7 @@ require "date"
 module Hotel
   class Administrator
 
-    attr_reader :reservations
-
+    attr_reader :rooms
 
     def initialize()
       @rooms = {}
@@ -28,8 +27,8 @@ module Hotel
       #    (1..requested_rooms).each do | res_num | do
       #    @rooms[available_rooms[res_num]] << Reservation.new ....
 
-      #Single Case Below
-      @rooms[available_rooms[0]] << Reservation.new(requested_check_in, requested_check_out,) #the first available room is chosen and pushed to @rooms array for that room
+      #Single case below
+      @rooms[available_rooms[0]] << Reservation.new(requested_check_in, requested_check_out) #first available room is chosen and pushed to @rooms array for that room
 
     end
 

@@ -5,12 +5,12 @@ module Hotel
   class Reservation
     COST = 200
 
-    attr_reader :check_in, :check_out, :parse_date, :room_num
+    attr_reader :check_in, :check_out, :parse_date  #, :room_num
 
-    def initialize(check_in, check_out, room_num)
+    def initialize(check_in, check_out)
       @check_in = Reservation.parse_date(check_in)
       @check_out = Reservation.parse_date(check_out)
-      @room_num = room_num
+      # @room_num = room_num
     end
 
 

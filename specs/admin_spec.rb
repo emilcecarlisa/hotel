@@ -25,52 +25,37 @@ describe "Admin" do
     it "can make a reservation" do
       @admin.make_reservation("24/12/2018", "25/12/2018")
 
-      result = @admin.reservations
+      result = @admin.rooms[1]
 
       result.first.check_in.must_be_instance_of DateTime
       result.first.check_out.must_be_instance_of DateTime
     end
 
-    it "can retrieve all reservations" do
-      # Arrange
-      @admin.make_reservation("24/12/2018", "25/12/2018")
-      # Act
-      result = @admin.reservations
-      # Assert
-      result.first.check_in.must_be_instance_of DateTime
+  end
+
+  describe "establishes room structure on instantiation" do
+    before do
+      @admin = Hotel::Administrator.new()
+    end
+    it "establishes the base room structure" do
+      room_array = @rooms
+
+      room_array.must_be_kind_of NilClass
+      # room_array.count.must_equal 20
+    end
+
+    it "has empty arrays upon instantiation" do
+      result = @admin.rooms[1]
+      result.must_be_kind_of Array
     end
   end
 
-  describe "return reservations" do
-    before do
-      @admin = Hotel::Administrator.new()
-      @admin.make_reservation("24/12/2018", "25/12/2018")
-    end
 
-    it "can call all reservation on a given date" do
-      get_reservation = @admin.see_available("24/12/2018", "25/12/2018")
-
-      get_reservation.must_be_instance_of Hotel::Reservation
-    end
-  end
-
-  describe "admin viewing available rooms" do
-    before do
-      @admin = Hotel::Administrator.new()
-      @admin.make_reservation("24/12/2018", "30/12/2018")
-    end
+  xdescribe "more tests" do
 
     it "view rooms not reserved for a given date range" do
       available_rooms = @admin.see_available("24/12/2018", "30/12/2018")
-
       # available_rooms.must_equal (2..20).to_a
-    end
-
-    it "returns an error if requested reservation has same date as an existing reservation" do
-      @admin.make_reservation("24/12/2018", "30/12/2018")
-      # assign room_num from the rooms instance variable?
-
-
     end
 
     it "returns an error if requested reservation overlaps in the back" do
@@ -92,9 +77,8 @@ describe "Admin" do
       @admin.make_reservation("23/12/2018", "01/01/2019")
       # have one appt, try to make another
     end
-    # it "return all rooms if the array is empty" do
-    #
-    # end
 
-  end # admin viewing
+    it "return all rooms if the array is empty" do
+    end
+  end
 end # Admin
