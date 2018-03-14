@@ -1,3 +1,5 @@
+## would have to put number of rooms to be instantiated in the reservation parameters and adjust from there?
+
 require "pry"
 require "date"
 
@@ -13,10 +15,13 @@ module Hotel
         @rooms[room_num] = []
       end
       # binding.pry
+
     end
 
 
     def make_reservation(requested_check_in, requested_check_out)
+      #  def make_reservation(requested_check_in, requested_check_out, number_of_rooms = 1)
+
       available_rooms = see_available(requested_check_in, requested_check_out) #calls available rooms based on given dates
 
       if available_rooms.length == 0
@@ -24,11 +29,11 @@ module Hotel
       end
 
       #Many cases (block rooms)
-      #    (1..requested_rooms).each do | res_num | do
-      #    @rooms[available_rooms[res_num]] << Reservation.new ....
+         (1..requested_rooms).each do | res_num | do
+         @rooms[available_rooms[res_num]] << Reservation.new ....
 
       #Single case below
-      @rooms[available_rooms[0]] << Reservation.new(requested_check_in, requested_check_out) #first available room is chosen and pushed to @rooms array for that room
+      @rooms[available_rooms[0]] << Reservation.new({check_in: requested_check_in, check_out: requested_check_out}) #first available room is chosen and pushed to @rooms array for that room
 
     end
 

@@ -57,11 +57,12 @@ describe "Admin" do
     end
 
     it "view available rooms for a given date range" do
-      available_room = @admin.see_available("24/12/2018", "30/12/2018")
+      available_room = @admin.see_available("24/12/2018", "25/12/2018")
       available_room.must_equal (1..20).to_a
     end
 
     it "returns an error if no rooms are available" do
+
       @admin.make_reservation("01/01/2018", "15/01/2018")
       @admin.make_reservation("01/01/2018", "15/01/2018")
       @admin.make_reservation("01/01/2018", "15/01/2018")
@@ -88,5 +89,5 @@ describe "Admin" do
       proc { @admin.see_available}.must_raise ArgumentError
     end
   end # describe
-  
+
 end # Admin

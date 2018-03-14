@@ -8,7 +8,7 @@ require_relative '../lib/admin'
 
 describe "Reservation" do
   before do
-    @reserve1 = Hotel::Reservation.new("30/10/2019","30/10/2018")
+    @reserve1 = Hotel::Reservation.new({check_in: "30/10/2019", check_out: "30/10/2018"})
   end
 
   it "creates an instance of a reservation" do
@@ -27,7 +27,7 @@ end
 describe "checks the lenth of stay" do
 
   it "checks the duration of the reservation" do
-    reserve1 = Hotel::Reservation.new("24/12/2018", "26/12/2018")
+    reserve1 = Hotel::Reservation.new({check_in: "24/12/2018", check_out: "26/12/2018"})
 
     reserve1.get_stay_length.must_equal(2)
   end
@@ -36,7 +36,7 @@ end
 describe "returns the cost of the reservation" do
 
   it "gets the total cost of a stay " do
-    reserve1 = Hotel::Reservation.new("24/12/2018", "26/12/2018")
+    reserve1 = Hotel::Reservation.new({check_in: "24/12/2018", check_out: "26/12/2018"})
 
     reserve1.total_cost.must_equal(200)
   end
