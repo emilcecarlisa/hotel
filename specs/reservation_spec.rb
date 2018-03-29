@@ -40,6 +40,5 @@ describe "returns the cost of the reservation" do
 
     reserve1.total_cost.must_equal(200)
   end
-
-
+  
 end

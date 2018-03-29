@@ -90,4 +90,22 @@ describe "Admin" do
     end
   end # describe
 
+  describe "block_room" do
+    before do
+      @admin = Hotel::Administrator.new
+      @admin.block_room("05/05/2018", "05/10/2018", 20)
+    end
+
+    it "raise error if rooms are blocked within date range" do
+      proc {
+        @admin.make_reservation("05/05/2018", "05/10/2018")
+      }.must_raise ArgumentError
+    end
+
+    it "won't throw error if the range is available" do
+      r = @admin.make_reservation("20/05/2018", "29/05/2018")
+      r.must_be_kind_of Hotel::Reservation  
+    end
+  end
+
 end # Admin

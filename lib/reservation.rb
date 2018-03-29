@@ -31,8 +31,5 @@ module Hotel
     def total_cost
       return (COST * (get_stay_length - 1))
     end
-
-
   end # class
-
 end #  module
